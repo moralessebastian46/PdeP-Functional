@@ -1,0 +1,76 @@
+Prueba punto 1:
+
+*Main> :t Cliente
+Cliente :: Nombre -> Resistencia -> Amigos -> Cliente
+
+
+Prueba punto 2:
+
+*Main> rodri
+Cliente "Rodri" 55 []
+*Main> marcos
+Cliente "Marcos" 40 [Cliente "Rodri" 55 []]
+*Main> cristian
+Cliente "Cristian" 2 []
+*Main> ana
+Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+
+
+Prueba punto 3:
+
+*Main> comoEsta rodri
+"fresco"
+*Main> comoEsta marcos
+"duro"
+*Main> comoEsta cristian
+"duro"
+*Main> comoEsta (Cliente "Marcos" 40 [rodri, ana])
+"piola"
+
+
+Prueba punto 4:
+
+*Main> hacerseAmigo ana ana
+Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> hacerseAmigo ana marcos
+Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> hacerseAmigo ana rodri
+Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> ((flip hacerseAmigo cristian).(flip hacerseAmigo ana).(flip hacerseAmigo marcos).(flip hacerseAmigo cristian)) ana
+Cliente "Ana" 120 [Cliente "Cristian" 2 [],Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+
+
+Prueba punto 5:
+
+*Main> tomarBebida GrogXD ana
+Cliente "Ana" 0 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> tomarBebida LaJarraLoca ana
+Cliente "Ana" 110 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
+*Main> tomarBebida (Klusener "Huevo") ana
+Cliente "Ana" 115 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> tomarBebida (Klusener "Chocolate") ana
+Cliente "Ana" 111 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> tomarBebida Tintico cristian
+Cliente "Cristian" 2 []
+*Main> tomarBebida Tintico ana
+Cliente "Ana" 130 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> tomarBebida (Soda 2) rodri
+Cliente "errpRodri" 55 []
+*Main> tomarBebida (Soda 10) ana
+Cliente "errrrrrrrrrpAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> tomarBebida (Soda 0) ana
+Cliente "epAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+
+
+Prueba punto 6:
+
+*Main> rescatarse rodri 5
+Cliente "Rodri" 255 []
+*Main> rescatarse rodri 1
+Cliente "Rodri" 155 []
+
+
+Prueba punto 7:
+
+*Main> ((tomarBebida (Klusener "huevo")).(flip rescatarse 2).(tomarBebida (Klusener "chocolate")).(tomarBebida LaJarraLoca)) ana
+Cliente "Ana" 196 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
