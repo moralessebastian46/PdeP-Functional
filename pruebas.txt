@@ -42,24 +42,26 @@ Cliente "Ana" 120 [Cliente "Cristian" 2 [],Cliente "Marcos" 40 [Cliente "Rodri" 
 
 Prueba punto 5:
 
-*Main> tomarBebida GrogXD ana
+*Main> beberGrogXD ana
 Cliente "Ana" 0 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> tomarBebida LaJarraLoca ana
+*Main> beberLaJarraLoca ana
 Cliente "Ana" 110 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
-*Main> tomarBebida (Klusener "Huevo") ana
+*Main> beberKlusener "huevo" ana
 Cliente "Ana" 115 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> tomarBebida (Klusener "Chocolate") ana
+*Main> beberKlusener "chocolate" ana
 Cliente "Ana" 111 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> tomarBebida Tintico cristian
+*Main> beberTintico cristian
 Cliente "Cristian" 2 []
-*Main> tomarBebida Tintico ana
+*Main> beberTintico ana
 Cliente "Ana" 130 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> tomarBebida (Soda 2) rodri
+*Main> beberSoda 2 rodri
 Cliente "errpRodri" 55 []
-*Main> tomarBebida (Soda 10) ana
+*Main> beberSoda 10 ana
 Cliente "errrrrrrrrrpAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> tomarBebida (Soda 0) ana
+*Main> beberSoda 0 ana
 Cliente "epAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> ((beberSoda 5).(beberSoda 2)) ana
+Cliente "errrrrperrpAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
 
 
 Prueba punto 6:
