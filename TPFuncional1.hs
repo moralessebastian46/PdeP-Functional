@@ -65,10 +65,10 @@ beberSoda :: Int -> Cliente -> Cliente
 cantidadLetrasGusto sabor = length sabor
 bajarResistenciaAAmigos amigos = map descontar10 amigos
 descontar10 (Cliente nombre resistencia amigos) = (Cliente nombre (resistencia-10) amigos)
-nombreModificado nombre fuerza =  "e" ++ (erresSegunFuerza fuerza) ++ "p" ++ nombre
+nombreModificado nombre fuerza =  (("e" ++).((erresSegunFuerza fuerza) ++).("p" ++)) nombre
 erresSegunFuerza fuerza = replicate fuerza 'r'
 
-beberGrogXD (Cliente nombre resistencia amigos) = Cliente nombre (resistencia - resistencia) amigos
+beberGrogXD (Cliente nombre resistencia amigos) = Cliente nombre 0 amigos
 beberLaJarraLoca (Cliente nombre resistencia amigos) = descontar10 (Cliente nombre resistencia (bajarResistenciaAAmigos amigos))
 beberKlusener sabor (Cliente nombre resistencia amigos) = Cliente nombre (resistencia - cantidadLetrasGusto(sabor)) amigos
 beberTintico (Cliente nombre resistencia amigos) = Cliente nombre (resistencia + 5* (cantAmigosQueTiene amigos)) amigos
