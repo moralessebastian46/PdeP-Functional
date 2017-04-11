@@ -1,6 +1,8 @@
 --Punto 1
-{-Se tomo la decision de modelar al tipo de cliente como Data, debido a que esto nos permite contar con mayor informacion a simple vista (expresividad) de la informacion con la que cuenta y sus diferentes tipos de dato.
-Una tupla no hubiese sido la mejor decision, debido a que no podriamos hubiese servido para modelar Clientes, Personas, Alumnos, etc. en cuanto a nuestro modelado simplemente nos limitamos a contar con Clientes y de esta manera acotar el manejo de tipos de dato.-}
+
+{-Tomamos la decision de modelar al tipo de cliente como Data, debido a que esto nos permite visualizar facilmente (expresividad) la informacion con la que cuenta y sus diferentes tipos de dato definidos por constructores.
+Una tupla no hubiese sido la mejor decision, debido a que, si bien hubiese servido para modelar Clientes, Personas, Alumnos, etc. en cuanto a nuestro modelado simplemente nos limitamos a contar con Clientes y de esta manera acotar el manejo de tipos de dato. Además, una tupla no es intuitiva y para utilizarla su estructura debe ser conocida por el usuario, por lo que sería difícil su compresión.
+Al contar con los Constructores anteriormente mencionados, pudimos lograr legibilidad en el código y evitar confusiones respecto a los tipos de dato. Sin olvidar que estos pueden ser utilizados como funciones.-}
 
 data Cliente = Cliente Nombre Resistencia Amigos deriving Show
 type Nombre = String
