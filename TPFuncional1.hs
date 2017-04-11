@@ -1,6 +1,6 @@
 --Punto 1
-{-Se tomo la decision de definir al tipo de cliente como Data, debido a que esto nos permite contar con una mayor expresividad de la informacion con la que cuenta y sus diferentes tipos de dato.
-Una lista no hubiese sido una buena decision, debido a que no podriamos insertar diferentes tipos de dato como se requiere.-}
+{-Se tomo la decision de modelar al tipo de cliente como Data, debido a que esto nos permite contar con mayor informacion a simple vista (expresividad) de la informacion con la que cuenta y sus diferentes tipos de dato.
+Una tupla no hubiese sido la mejor decision, debido a que no podriamos hubiese servido para modelar Clientes, Personas, Alumnos, etc. en cuanto a nuestro modelado simplemente nos limitamos a contar con Clientes y de esta manera acotar el manejo de tipos de dato.-}
 
 data Cliente = Cliente Nombre Resistencia Amigos deriving Show
 type Nombre = String
@@ -36,17 +36,17 @@ comoEsta (Cliente _ resistencia amigos) | resistencia >50 = "fresco"
 --Punto 4
 hacerseAmigo :: Cliente -> Cliente -> Cliente
 listaNombres :: [Cliente] -> [Nombre]
-noPoseeEseAmigo :: Cliente -> Cliente -> Bool
-noTienenElMismoNombre :: Cliente -> Cliente -> Bool
+poseeEseAmigo :: Cliente -> Cliente -> Bool
+tienenElMismoNombre :: Cliente -> Cliente -> Bool
 agregarAmigo :: Cliente -> Cliente -> Cliente
 
 listaNombres amigos = map nombre amigos
-noPoseeEseAmigo (Cliente _ _ amigos) (Cliente nombre1 _ _) = (elem nombre1 (listaNombres amigos) == False)
-noTienenElMismoNombre (Cliente nombre _ _) (Cliente nombre1 _ _) = nombre /= nombre1
+poseeEseAmigo (Cliente _ _ amigos) (Cliente nombre1 _ _) = elem nombre1 (listaNombres amigos)
+tienenElMismoNombre (Cliente nombre _ _) (Cliente nombre1 _ _) = nombre == nombre1
 agregarAmigo (Cliente nombre resistencia amigos) cliente2 = (Cliente nombre resistencia (cliente2: amigos))
 
-hacerseAmigo cliente1 cliente2 | noPoseeEseAmigo cliente1 cliente2 == False = cliente1--"Ya son amigos"
-                               | noTienenElMismoNombre cliente1 cliente2 == False = cliente1--"No pueden ser amigos porque tienen el mismo nombre"
+hacerseAmigo cliente1 cliente2 | poseeEseAmigo cliente1 cliente2 == True = cliente1--"Ya son amigos"
+                               | tienenElMismoNombre cliente1 cliente2 == True = cliente1--"No pueden ser amigos porque tienen el mismo nombre"
                                | otherwise = agregarAmigo cliente1 cliente2
 
 
@@ -83,8 +83,4 @@ rescatarse (Cliente nombre resistencia amigos) horas | horas >0 && horas <=3 = (
                                                      | otherwise = (Cliente nombre (resistencia+200) amigos)
                                                        
                                                                     
---Punto 7
-{-
-*Main> ((tomarBebida (Klusener "huevo")).(flip rescatarse 2).(tomarBebida (Klusener "chocolate")).(tomarBebida LaJarraLoca)) ana
-Cliente "Ana" 196 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
--}
+--Punto 7: Ver en Pruebas.txt
