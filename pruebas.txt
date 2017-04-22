@@ -7,13 +7,13 @@ Cliente :: Nombre -> Resistencia -> Amigos -> Cliente
 Prueba punto 2:
 
 *Main> rodri
-Cliente "Rodri" 55 []
+Cliente {nombre = "Rodri", resistencia = 55, amigos = []}
 *Main> marcos
-Cliente "Marcos" 40 [Cliente "Rodri" 55 []]
+Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
 *Main> cristian
-Cliente "Cristian" 2 []
+Cliente {nombre = "Cristian", resistencia = 2, amigos = []}
 *Main> ana
-Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
 
 
 Prueba punto 3:
@@ -31,48 +31,52 @@ Prueba punto 3:
 Prueba punto 4:
 
 *Main> hacerseAmigo ana ana
-Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*** Exception: No pueden ser amigos porque tienen el mismo nombre
+CallStack (from HasCallStack):
+  error, called at TPFuncional1.hs:48:74 in main:Main
 *Main> hacerseAmigo ana marcos
-Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
 *Main> hacerseAmigo ana rodri
-Cliente "Ana" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
 *Main> ((flip hacerseAmigo cristian).(flip hacerseAmigo ana).(flip hacerseAmigo marcos).(flip hacerseAmigo cristian)) ana
-Cliente "Ana" 120 [Cliente "Cristian" 2 [],Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-
+*** Exception: No pueden ser amigos porque tienen el mismo nombre
+CallStack (from HasCallStack):
+  error, called at TPFuncional1.hs:48:74 in main:Main
+*Main> 
 
 Prueba punto 5:
 
-*Main> beberGrogXD ana
-Cliente "Ana" 0 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> beberLaJarraLoca ana
-Cliente "Ana" 110 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
-*Main> beberKlusener "huevo" ana
-Cliente "Ana" 115 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> beberKlusener "chocolate" ana
-Cliente "Ana" 111 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> beberTintico cristian
-Cliente "Cristian" 2 []
-*Main> beberTintico ana
-Cliente "Ana" 130 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> beberSoda 2 rodri
-Cliente "errpRodri" 55 []
-*Main> beberSoda 10 ana
-Cliente "errrrrrrrrrpAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> beberSoda 0 ana
-Cliente "epAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
-*Main> ((beberSoda 5).(beberSoda 2)) ana
-Cliente "errrrrperrpAna" 120 [Cliente "Marcos" 40 [Cliente "Rodri" 55 []],Cliente "Rodri" 55 []]
+*Main> grogXD ana
+Cliente {nombre = "Ana", resistencia = 0, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> laJarraLoca ana
+Cliente {nombre = "Ana", resistencia = 110, amigos = [Cliente {nombre = "Marcos", resistencia = 30, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 45, amigos = []}]}
+*Main> klusener "huevo" ana
+Cliente {nombre = "Ana", resistencia = 115, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> klusener "chocolate" ana
+Cliente {nombre = "Ana", resistencia = 111, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> tintico cristian
+Cliente {nombre = "Cristian", resistencia = 2, amigos = []}
+*Main> tintico ana
+Cliente {nombre = "Ana", resistencia = 130, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> soda 2 rodri
+Cliente {nombre = "errpRodri", resistencia = 55, amigos = []}
+*Main> soda 10 ana
+Cliente {nombre = "errrrrrrrrrpAna", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> soda 0 ana
+Cliente {nombre = "epAna", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
+*Main> ((soda 5).(soda 2)) ana
+Cliente {nombre = "errrrrperrpAna", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]}
 
 
 Prueba punto 6:
 
 *Main> rescatarse rodri 5
-Cliente "Rodri" 255 []
+Cliente {nombre = "Rodri", resistencia = 255, amigos = []}
 *Main> rescatarse rodri 1
-Cliente "Rodri" 155 []
+Cliente {nombre = "Rodri", resistencia = 155, amigos = []}
 
 
 Prueba punto 7:
 
-*Main> ((tomarBebida (Klusener "huevo")).(flip rescatarse 2).(tomarBebida (Klusener "chocolate")).(tomarBebida LaJarraLoca)) ana
-Cliente "Ana" 196 [Cliente "Marcos" 30 [Cliente "Rodri" 55 []],Cliente "Rodri" 45 []]
+*Main> ((klusener "huevo").(flip rescatarse 2).(klusener "chocolate").(laJarraLoca)) ana
+Cliente {nombre = "Ana", resistencia = 196, amigos = [Cliente {nombre = "Marcos", resistencia = 30, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 45, amigos = []}]}
