@@ -42,7 +42,7 @@ poseeEseAmigo (Cliente _ _ amigos) (Cliente nombre1 _ _) = elem nombre1 (listaNo
 tienenElMismoNombre (Cliente nombre _ _) (Cliente nombre1 _ _) = nombre == nombre1
 agregarAmigo (Cliente nombre resistencia amigos) cliente2 = (Cliente nombre resistencia (cliente2: amigos))
 
-hacerseAmigo cliente1 cliente2 | poseeEseAmigo cliente1 cliente2 = cliente1--"Ya son amigos, no hago nada"
+hacerseAmigo cliente1 cliente2 | poseeEseAmigo cliente1 cliente2 = error "No puede ser agregado nuevamente porque ya son amigos"
                                | tienenElMismoNombre cliente1 cliente2 = error "No pueden ser amigos porque tienen el mismo nombre"
                                | otherwise = agregarAmigo cliente1 cliente2
 
