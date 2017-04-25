@@ -97,10 +97,11 @@ tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos ((beber tragoCab) client
 
 --Punto 1.d)
 
-dameOtro cliente = (tomarUltimaBebida cliente) cliente
+dameOtro (Cliente nombre resistencia amigos (bebidaCab:bebidasCola)) = (beber bebidaCab) (Cliente nombre resistencia amigos (bebidaCab:bebidasCola))
 
-tomarUltimaBebida (Cliente nombre resistencia amigos (trago:[])) = beber trago
-tomarUltimaBebida (Cliente nombre resistencia amigos (tragoCab:tragoCola)) = tomarUltimaBebida (Cliente nombre resistencia amigos(tragoCola))
+--dameOtro cliente = (tomarUltimaBebida cliente) cliente
+--tomarUltimaBebida (Cliente nombre resistencia amigos (trago:[])) = beber trago
+--tomarUltimaBebida (Cliente nombre resistencia amigos (tragoCab:tragoCola)) = tomarUltimaBebida (Cliente nombre resistencia amigos(tragoCola))
 
 
 
@@ -125,4 +126,13 @@ mezclaExplosiva cliente = (2.5, tomarTragos cliente [GrogXD,GrogXD,Klusener "Hue
 itinerarioBasico cliente = (5, ((klusener "huevo").(flip rescatarse 2).(klusener "chocolate").(laJarraLoca)) cliente)
 salidaDeAmigos cliente = (1, hacerseAmigo (tomarTragos cliente [Soda 1, Tintico,LaJarraLoca]) robertoCarlos) 
 
+
 --Punto 4)
+
+--Punto 5)
+
+tragosChuck 1 = [Soda 1]
+
+tragosChuck i  = (Soda i):(tragosChuck (i-1))
+
+chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 5)
