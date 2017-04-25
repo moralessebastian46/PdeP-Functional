@@ -18,9 +18,6 @@ type Resistencia = Int
 type Amigos = [Cliente]
 type Bebidas = [Bebida]
 
-tomarTragos cliente [] = cliente
-tomarTragos cliente (cab:cola) = tomarTragos (cab cliente) cola
-
 --Punto 2
 rodri = Cliente "Rodri" 55 [] [Tintico]
 marcos = Cliente "Marcos" 40 [rodri] [Klusener "Guinda"]
@@ -58,6 +55,7 @@ bajarResistenciaAAmigos :: [Cliente] -> [Cliente]
 descontar10 :: Cliente -> Cliente
 nombreModificado :: [Char] -> Int -> [Char]
 erresSegunFuerza :: Int -> [Char]
+
 grogXD :: Cliente -> Cliente
 laJarraLoca :: Cliente -> Cliente
 klusener :: Foldable t => t a -> Cliente -> Cliente
@@ -86,16 +84,28 @@ rescatarse (Cliente nombre resistencia amigos bebidas) horas | horas <=3 = (Clie
 --Punto 7: Ver en Pruebas.txt, se implementa directamente en workspace.
 
 ------------------------------------------------------------TP 2---------------------------------------------------------------
-{-
+beber GrogXD = grogXD
+beber LaJarraLoca = laJarraLoca
+beber Tintico = tintico
+beber (Klusener sabor) = klusener sabor
+beber (Soda fuerza) = soda fuerza
+
+--beber Soda = soda 
+
 --Punto  1.c)
 
 tomarTragos cliente [] = cliente
-tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos (tragoCab Cliente) tragoCola
+tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos ((beber tragoCab) cliente) tragoCola
 
 --Punto 1.d)
 
-dameOtro (Cliente nombre resistencia amigos (bebidasCab:bebidasCola)) = bebidasCab Cliente
+dameOtro cliente = (tomarUltimaBebida cliente) cliente
 
+tomarUltimaBebida (Cliente nombre resistencia amigos (trago:[])) = beber trago
+tomarUltimaBebida (Cliente nombre resistencia amigos (tragoCab:tragoCola)) = tomarUltimaBebida (Cliente nombre resistencia amigos(tragoCola))
+
+
+{-
 --Punto 2.a)
 
 nuevaResistencia cliente grogXD = 0
