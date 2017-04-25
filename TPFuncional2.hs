@@ -90,8 +90,6 @@ beber Tintico = tintico
 beber (Klusener sabor) = klusener sabor
 beber (Soda fuerza) = soda fuerza
 
---beber Soda = soda 
-
 --Punto  1.c)
 
 tomarTragos cliente [] = cliente
@@ -105,19 +103,18 @@ tomarUltimaBebida (Cliente nombre resistencia amigos (trago:[])) = beber trago
 tomarUltimaBebida (Cliente nombre resistencia amigos (tragoCab:tragoCola)) = tomarUltimaBebida (Cliente nombre resistencia amigos(tragoCola))
 
 
-{-
+
 --Punto 2.a)
 
-nuevaResistencia cliente grogXD = 0
-nuevaResistencia (Cliente _ resistencia _ _) laJarraLoca = resistencia - 10
-nuevaResistencia (Cliente _ resistencia _ _) klusener sabor = resistencia - length(sabor)
-nuevaResistencia (Cliente _ resistencia amigos _) tintico = resistencia + 5* (length amigos)
-nuevaResistencia (Cliente _ resistencia _ _) soda = resistencia
+nuevaResistencia cliente GrogXD = 0
+nuevaResistencia (Cliente _ resistencia _ _) LaJarraLoca = resistencia - 10
+nuevaResistencia (Cliente _ resistencia _ _) (Klusener sabor) = resistencia - length(sabor)
+nuevaResistencia (Cliente _ resistencia amigos _) Tintico = resistencia + 5* (length amigos)
+nuevaResistencia (Cliente _ resistencia _ _) (Soda _)= resistencia
 
 cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
 
 --Punto 2.b)
 
-cuantasPuedeTomar = length.cualesPuedeTomar
+cuantasPuedeTomar cliente= (length.(cualesPuedeTomar cliente)) 
 
--}
