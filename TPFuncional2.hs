@@ -70,7 +70,7 @@ erresSegunFuerza fuerza = replicate fuerza 'r'
 grogXD (Cliente nombre resistencia amigos bebidas) = Cliente nombre 0 amigos (GrogXD : bebidas)
 laJarraLoca (Cliente nombre resistencia amigos bebidas) = descontar10 (Cliente nombre resistencia (bajarResistenciaAAmigos amigos) (LaJarraLoca : bebidas))
 --TODO: agregar la bebida a la lista de bebidas en klusener
-klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos (bebidas)
+klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos ((Klusener sabor):bebidas)
 tintico (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia + 5* (length amigos)) amigos (Tintico : bebidas)
 soda fuerza (Cliente nombre resistencia amigos bebidas) = Cliente (nombreModificado nombre fuerza) resistencia amigos ((Soda fuerza):bebidas)
 
@@ -118,3 +118,11 @@ cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
 
 cuantasPuedeTomar cliente= (length.(cualesPuedeTomar cliente)) 
 
+--Punto 3)
+robertoCarlos = Cliente "Roberto Carlos" 165 [] []
+
+mezclaExplosiva cliente = (2.5, tomarTragos cliente [GrogXD,GrogXD,Klusener "Huevo",Klusener "Frutilla"]) 
+itinerarioBasico cliente = (5, ((klusener "huevo").(flip rescatarse 2).(klusener "chocolate").(laJarraLoca)) cliente)
+salidaDeAmigos cliente = (1, hacerseAmigo (tomarTragos cliente [Soda 1, Tintico,LaJarraLoca]) robertoCarlos) 
+
+--Punto 4)
