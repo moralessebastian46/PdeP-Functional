@@ -81,3 +81,30 @@ rescatarse (Cliente nombre resistencia amigos bebidas) horas | horas <=3 = (Clie
                                                      | otherwise = (Cliente nombre (resistencia+200) amigos bebidas)
                                                                     
 --Punto 7: Ver en Pruebas.txt, se implementa directamente en workspace.
+
+------------------------------------------------------------TP 2---------------------------------------------------------------
+{-
+--Punto  1.c)
+
+tomarTragos cliente [] = cliente
+tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos (tragoCab Cliente) tragoCola
+
+--Punto 1.d)
+
+dameOtro (Cliente nombre resistencia amigos (bebidasCab:bebidasCola)) = bebidasCab Cliente
+
+--Punto 2.a)
+
+nuevaResistencia cliente grogXD = 0
+nuevaResistencia (Cliente _ resistencia _ _) laJarraLoca = resistencia - 10
+nuevaResistencia (Cliente _ resistencia _ _) klusener sabor = resistencia - length(sabor)
+nuevaResistencia (Cliente _ resistencia amigos _) tintico = resistencia + 5* (length amigos)
+nuevaResistencia (Cliente _ resistencia _ _) soda = resistencia
+
+cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
+
+--Punto 2.b)
+
+cuantasPuedeTomar = length.cualesPuedeTomar
+
+-}
