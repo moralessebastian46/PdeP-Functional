@@ -18,6 +18,9 @@ type Resistencia = Int
 type Amigos = [Cliente]
 type Bebidas = [Bebida]
 
+tomarTragos cliente [] = cliente
+tomarTragos cliente (cab:cola) = tomarTragos (cab cliente) cola
+
 --Punto 2
 rodri = Cliente "Rodri" 55 [] [Tintico]
 marcos = Cliente "Marcos" 40 [rodri] [Klusener "Guinda"]
