@@ -58,7 +58,7 @@ erresSegunFuerza :: Int -> [Char]
 
 grogXD :: Cliente -> Cliente
 laJarraLoca :: Cliente -> Cliente
-klusener :: Foldable t => t a -> Cliente -> Cliente
+klusener :: String -> Cliente -> Cliente
 tintico :: Cliente -> Cliente
 soda :: Int -> Cliente -> Cliente
 
@@ -70,7 +70,7 @@ erresSegunFuerza fuerza = replicate fuerza 'r'
 grogXD (Cliente nombre resistencia amigos bebidas) = Cliente nombre 0 amigos (GrogXD : bebidas)
 laJarraLoca (Cliente nombre resistencia amigos bebidas) = descontar10 (Cliente nombre resistencia (bajarResistenciaAAmigos amigos) (LaJarraLoca : bebidas))
 --TODO: agregar la bebida a la lista de bebidas en klusener
-klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos (bebidas)
+klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos ((Klusener sabor):bebidas)
 tintico (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia + 5* (length amigos)) amigos (Tintico : bebidas)
 soda fuerza (Cliente nombre resistencia amigos bebidas) = Cliente (nombreModificado nombre fuerza) resistencia amigos ((Soda fuerza):bebidas)
 
