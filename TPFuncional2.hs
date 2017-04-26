@@ -99,12 +99,6 @@ tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos ((beber tragoCab) client
 
 dameOtro (Cliente nombre resistencia amigos (bebidaCab:bebidasCola)) = (beber bebidaCab) (Cliente nombre resistencia amigos (bebidaCab:bebidasCola))
 
---dameOtro cliente = (tomarUltimaBebida cliente) cliente
---tomarUltimaBebida (Cliente nombre resistencia amigos (trago:[])) = beber trago
---tomarUltimaBebida (Cliente nombre resistencia amigos (tragoCab:tragoCola)) = tomarUltimaBebida (Cliente nombre resistencia amigos(tragoCola))
-
-
-
 --Punto 2.a)
 
 nuevaResistencia cliente GrogXD = 0
@@ -129,10 +123,21 @@ salidaDeAmigos cliente = (1, hacerseAmigo (tomarTragos cliente [Soda 1, Tintico,
 
 --Punto 4)
 
---Punto 5)
+--Punto 5.a)
 
-tragosChuck 1 = [Soda 1]
+tragosChuck i  = (Soda i):(tragosChuck (i+1))
+chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
-tragosChuck i  = (Soda i):(tragosChuck (i-1))
+--Punto 5.b)
+--En nuestro caso, al concatenar el último trago al principio de la lista si se podría pedir otro trago con la función dameOtro, el motor de Haskel llega
+--a evaluar la funcion dameOtro por la evaluación diferida, pero luego, fallaría al querer mostrar el cliente por pantalla luego de ser evaluado por dicha 
+--función porque la lista de tragos tomados es infinita:
 
-chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 5)
+--Main> dameOtro chuckNorris
+--Cliente {nombre = "erpChuck", resistencia = 1000, amigos = [Cliente {nombre = "Ana", resistencia = 120, 
+--amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
+--bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
+--bebidas = [Tintico]}], bebidas = []}], bebidas = [Soda 1,Soda 1,Soda 2,Soda 3,Soda 4,Soda 5,Soda 6,Soda..]}
+
+--Punto 5.d)
+--Si se puede porque solo evalua la resistencia de ambos, no llega a evaluar la lista infinita que tiene "Chuk" por el concepto de evaluación diferida.
