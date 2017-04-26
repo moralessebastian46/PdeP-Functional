@@ -126,6 +126,11 @@ execute (cabItinerario:colaItinerario) cliente = execute colaItinerario (cabItin
 intensidad itinerario = 1 * genericLength(snd itinerario)/(fst itinerario)
 
 --Punto 4.b)
+ejecutarMasIntenso cliente (cab:cola) = ejecutarItinerario (buscar cab cola) cliente
+
+buscar max [] = max
+buscar max (cabe:cola) | intensidad max > intensidad cabe = buscar max (cola)
+                    |otherwise = buscar cabe (cola)
 
 --Punto 5.a)
 tragosChuck i  = (Soda i):(tragosChuck (i+1))
