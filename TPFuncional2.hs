@@ -1,3 +1,4 @@
+import Data.List
 --Punto 1
 
 {-Tomamos la decision de modelar al tipo de cliente como Data, debido a que esto nos permite visualizar facilmente (expresividad) la informacion con la que cuenta y sus diferentes tipos de dato definidos por constructores.
@@ -41,9 +42,9 @@ tienenElMismoNombre :: Cliente -> Cliente -> Bool
 agregarAmigo :: Cliente -> Cliente -> Cliente
 
 listaNombres amigos = map nombre amigos
-poseeEseAmigo (Cliente _ _ amigos _) (Cliente nombre1 _ _ _) = elem nombre1 (listaNombres amigos)
-tienenElMismoNombre (Cliente nombre _ _ _) (Cliente nombre1 _ _ _) = nombre == nombre1
-agregarAmigo (Cliente nombre resistencia amigos bebidas) cliente2 = (Cliente nombre resistencia (cliente2: amigos) bebidas)
+poseeEseAmigo (Cliente nombre1 _ _ _) (Cliente _ _ amigos _) = elem nombre1 (listaNombres amigos)
+tienenElMismoNombre (Cliente nombre1 _ _ _) (Cliente nombre _ _ _) = nombre == nombre1
+agregarAmigo cliente1 (Cliente nombre resistencia amigos bebidas) = (Cliente nombre resistencia (cliente1: amigos) bebidas)
 
 hacerseAmigo cliente1 cliente2 | poseeEseAmigo cliente1 cliente2 = error "No puede ser agregado nuevamente porque ya son amigos"
                                | tienenElMismoNombre cliente1 cliente2 = error "No pueden ser amigos porque tienen el mismo nombre"
@@ -76,9 +77,9 @@ soda fuerza (Cliente nombre resistencia amigos bebidas) = Cliente (nombreModific
 
 
 --Punto 6
-rescatarse :: (Num a, Ord a) => Cliente -> a -> Cliente
+rescatarse :: (Num a, Ord a) => a -> Cliente -> Cliente
 
-rescatarse (Cliente nombre resistencia amigos bebidas) horas | horas <=3 = (Cliente nombre (resistencia+100) amigos bebidas)
+rescatarse horas (Cliente nombre resistencia amigos bebidas) | horas <=3 = (Cliente nombre (resistencia+100) amigos bebidas)
                                                      | otherwise = (Cliente nombre (resistencia+200) amigos bebidas)
                                                                     
 --Punto 7: Ver en Pruebas.txt, se implementa directamente en workspace.
@@ -91,16 +92,13 @@ beber (Klusener sabor) = klusener sabor
 beber (Soda fuerza) = soda fuerza
 
 --Punto  1.c)
-
 tomarTragos cliente [] = cliente
 tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos ((beber tragoCab) cliente) tragoCola
 
 --Punto 1.d)
-
 dameOtro (Cliente nombre resistencia amigos (bebidaCab:bebidasCola)) = (beber bebidaCab) (Cliente nombre resistencia amigos (bebidaCab:bebidasCola))
 
 --Punto 2.a)
-
 nuevaResistencia cliente GrogXD = 0
 nuevaResistencia (Cliente _ resistencia _ _) LaJarraLoca = resistencia - 10
 nuevaResistencia (Cliente _ resistencia _ _) (Klusener sabor) = resistencia - length(sabor)
@@ -110,21 +108,26 @@ nuevaResistencia (Cliente _ resistencia _ _) (Soda _)= resistencia
 cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
 
 --Punto 2.b)
-
 cuantasPuedeTomar cliente= (length.(cualesPuedeTomar cliente)) 
 
---Punto 3)
+--Punto 3.a)
 robertoCarlos = Cliente "Roberto Carlos" 165 [] []
 
-mezclaExplosiva cliente = (2.5, tomarTragos cliente [GrogXD,GrogXD,Klusener "Huevo",Klusener "Frutilla"]) 
-itinerarioBasico cliente = (5, ((klusener "huevo").(flip rescatarse 2).(klusener "chocolate").(laJarraLoca)) cliente)
-salidaDeAmigos cliente = (1, hacerseAmigo (tomarTragos cliente [Soda 1, Tintico,LaJarraLoca]) robertoCarlos) 
+mezclaExplosiva = (2.5, [beber GrogXD,beber GrogXD,beber (Klusener "Huevo"),beber (Klusener "Frutilla")])
+itinerarioBasico = (5.0, [beber LaJarraLoca, beber (Klusener "chocolate"), rescatarse 2, beber (Klusener "huevo")])
+salidaDeAmigos = (1.0, [beber (Soda 1),beber Tintico, hacerseAmigo robertoCarlos, beber LaJarraLoca])
 
+--Punto 3.b)
+ejecutarItinerario itinerario cliente = execute (snd itinerario) cliente
+execute [] cliente = cliente
+execute (cabItinerario:colaItinerario) cliente = execute colaItinerario (cabItinerario cliente)
 
---Punto 4)
+--Punto 4.a)
+intensidad itinerario = 1 * genericLength(snd itinerario)/(fst itinerario)
+
+--Punto 4.b)
 
 --Punto 5.a)
-
 tragosChuck i  = (Soda i):(tragosChuck (i+1))
 chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
