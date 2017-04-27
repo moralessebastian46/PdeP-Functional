@@ -1,3 +1,5 @@
+----------------------------------------------------------------------------TP 1----------------------------------------------------------------------------
+
 Prueba punto 1:
 
 *Main> :t Cliente
@@ -84,3 +86,72 @@ Prueba punto 7:
 
 *Main> ((klusener "huevo").(flip rescatarse 2).(klusener "chocolate").(laJarraLoca)) ana
 Cliente {nombre = "Ana", resistencia = 196, amigos = [Cliente {nombre = "Marcos", resistencia = 30, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 45, amigos = []}]}
+
+
+----------------------------------------------------------------------------TP 2----------------------------------------------------------------------------
+
+
+Punto 1b)
+
+*Main> (length.bebidas.(soda 3)) marcos
+2
+
+*Main> (resistencia.(soda 3)) marcos
+40
+
+
+Punto 1c)
+
+*Main> nombre (tomarTragos rodri [Soda 1, Soda 2])
+"errperpRodri"
+
+*Main> resistencia (tomarTragos marcos [Klusener "Huevo", Tintico, LaJarraLoca])
+30
+
+*Main> (length.bebidas) (tomarTragos marcos [Klusener "Huevo", Tintico, LaJarraLoca])
+4
+
+
+Punto 1d)
+
+*Main> dameOtro ana
+*** Exception: <interactive>:104:1-148: Non-exhaustive patterns in function dameOtro
+
+*Main> (length.bebidas.dameOtro) marcos
+2
+
+*Main> (resistencia.dameOtro) marcos
+34
+
+*Main> (length.bebidas.dameOtro.(soda 1)) rodri
+3
+
+*Main> (nombre.dameOtro.(soda 1)) rodri
+"erperpRodri"
+
+
+Punto 2b)
+
+*Main> length (cualesPuedeTomar rodri [GrogXD, Tintico, Klusener "Frutilla"])
+2
+
+*Main> length (cualesPuedeTomar rodri [GrogXD, Tintico, Klusener "fruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuutuuuuuuilla"])
+1
+
+
+Punto 3b)
+
+*Main> (length.amigos) (ejecutarItinerario salidaDeAmigos rodri)
+1
+
+*Main> nombre (ejecutarItinerario salidaDeAmigos rodri)
+"erpRodri"
+
+*Main> resistencia (ejecutarItinerario salidaDeAmigos rodri)
+45
+
+*Main> (resistencia.head.amigos) (ejecutarItinerario salidaDeAmigos rodri)
+155
+
+*Main> (length.bebidas) (ejecutarItinerario salidaDeAmigos rodri)
+4
