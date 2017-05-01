@@ -155,3 +155,20 @@ Punto 3b)
 
 *Main> (length.bebidas) (ejecutarItinerario salidaDeAmigos rodri)
 4
+
+
+Punto 4a)
+
+*Main> intensidad mezclaExplosiva
+1.6
+*Main> intensidad itinerarioBasico
+0.8
+*Main> intensidad salidaDeAmigos
+4.0
+
+
+Punto 4b)
+
+*Main> ejecutarMasIntenso rodri [salidaDeAmigos,mezclaExplosiva,itinerarioBasico]
+Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [LaJarraLoca,Tintico,Soda 1,Tintico]}
+
