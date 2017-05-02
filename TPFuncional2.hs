@@ -12,7 +12,7 @@ amigos         :: Amigos,
 bebidas :: Bebidas
 } deriving Show
 
-data Bebida = GrogXD | LaJarraLoca | Klusener String | Tintico | Soda Int | LaJarraPopular deriving Show
+data Bebida = GrogXD | LaJarraLoca | Klusener String | Tintico | Soda Int deriving Show
 
 type Nombre = String
 type Resistencia = Int
@@ -152,7 +152,7 @@ chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
 
 --Punto 6)
-laJarraPopular 0 (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) = (Cliente nombre resistencia (amigosCab:amigosCola) (LaJarraPopular:bebidas))
+laJarraPopular 0 cliente = cliente
 laJarraPopular espirituosidad (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) = laJarraPopular (espirituosidad-1) (hacerGrupoAmigos (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) amigosCab)
 
 hacerGrupoAmigos cliente (Cliente nombre resistencia amigos bebidas) = hacerMuchosamigos cliente amigos
