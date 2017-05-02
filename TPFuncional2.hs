@@ -149,3 +149,13 @@ chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
 --Punto 5.d)
 --Si se puede porque solo evalua la resistencia de ambos, no llega a evaluar la lista infinita que tiene "Chuk" por el concepto de evaluación diferida.
+
+
+--Punto 6)
+laJarraPopular 0 cliente = cliente
+laJarraPopular espirituosidad (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) = laJarraPopular (espirituosidad-1) (hacerGrupoAmigos (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) amigosCab)
+
+hacerGrupoAmigos cliente (Cliente nombre resistencia amigos bebidas) = hacerMuchosamigos cliente amigos
+
+hacerMuchosamigos cliente [] = cliente
+hacerMuchosamigos cliente (cab:cola) = hacerMuchosamigos (hacerseAmigo cab cliente) cola
