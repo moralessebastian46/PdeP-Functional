@@ -172,3 +172,15 @@ Punto 4b)
 *Main> ejecutarMasIntenso rodri [salidaDeAmigos,mezclaExplosiva,itinerarioBasico]
 Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [LaJarraLoca,Tintico,Soda 1,Tintico]}
 
+
+Punto 6)
+
+*Main> laJarraPopular 0 (hacerseAmigo ana robertoCarlos)
+Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = []}
+
+*Main> laJarraPopular 3 (hacerseAmigo ana robertoCarlos)
+Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]},Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = []}
+
+*Main> laJarraPopular 4 (hacerseAmigo (hacerseAmigo ana cristian) robertoCarlos)
+Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]},Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []},Cliente {nombre = "Cristian", resistencia = 2, amigos = [Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = [GrogXD,LaJarraLoca]}], bebidas = []}
+
