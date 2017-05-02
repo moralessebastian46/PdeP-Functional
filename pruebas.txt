@@ -175,12 +175,11 @@ Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Rob
 
 Punto 6)
 
-*Main> laJarraPopular 0 (hacerseAmigo ana robertoCarlos)
-Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = []}
+*Main> map nombre (amigos (laJarraPopular 0 (hacerseAmigo ana robertoCarlos)))
+["Ana"]
 
-*Main> laJarraPopular 3 (hacerseAmigo ana robertoCarlos)
-Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]},Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = []}
+*Main> map nombre (amigos (laJarraPopular 3 (hacerseAmigo ana robertoCarlos)))
+["Rodri","Marcos","Ana"]
 
-*Main> laJarraPopular 4 (hacerseAmigo (hacerseAmigo ana cristian) robertoCarlos)
-Cliente {nombre = "Roberto Carlos", resistencia = 165, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]},Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []},Cliente {nombre = "Cristian", resistencia = 2, amigos = [Cliente {nombre = "Ana", resistencia = 120, amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], bebidas = [Tintico]}], bebidas = []}], bebidas = [GrogXD,LaJarraLoca]}], bebidas = []}
-
+*Main> map nombre (amigos (laJarraPopular 4 (hacerseAmigo (hacerseAmigo ana cristian) robertoCarlos)))
+["Rodri","Marcos","Ana","Cristian"]
