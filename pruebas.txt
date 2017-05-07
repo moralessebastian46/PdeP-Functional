@@ -133,10 +133,10 @@ Punto 1d)
 
 Punto 2b)
 
-*Main> length (cualesPuedeTomar rodri [GrogXD, tintico, klusener "Frutilla"])
+*Main> length (cualesPuedeTomar rodri [grogXD, tintico, klusener "Frutilla"])
 2
 
-*Main> length (cualesPuedeTomar rodri [GrogXD, tintico, klusener "fruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuutuuuuuuilla"])
+*Main> length (cualesPuedeTomar rodri [grogXD, tintico, klusener "fruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuutuuuuuuilla"])
 1
 
 
@@ -171,7 +171,7 @@ Punto 4a)
 Punto 4b)
 
 *Main> ejecutarMasIntenso rodri [salidaDeAmigos,mezclaExplosiva,itinerarioBasico]
-Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [laJarraLoca,tintico,Soda 1,tintico]}
+Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [<function>,<function>,<function>,<function>]}
 
 
 Punto 6)
