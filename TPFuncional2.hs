@@ -1,4 +1,5 @@
 import Data.List
+import Text.Show.Functions
 --Punto 1
 
 {-Tomamos la decision de modelar al tipo de cliente como Data, debido a que esto nos permite visualizar facilmente (expresividad) la informacion con la que cuenta y sus diferentes tipos de dato definidos por constructores.
@@ -6,23 +7,21 @@ Una tupla no hubiese sido la mejor decision, debido a que, si bien hubiese servi
 Al contar con los Constructores anteriormente mencionados, pudimos lograr legibilidad en el código y evitar confusiones respecto a los tipos de dato. Sin olvidar que estos pueden ser utilizados como funciones.-}
 
 data Cliente = Cliente {
-nombre         :: Nombre,
+nombre      :: Nombre,
 resistencia :: Resistencia,
-amigos         :: Amigos,
-bebidas :: Bebidas
+amigos      :: Amigos,
+bebidas     :: Bebidas
 } deriving Show
-
-data Bebida = GrogXD | LaJarraLoca | Klusener String | Tintico | Soda Int deriving Show
 
 type Nombre = String
 type Resistencia = Int
 type Amigos = [Cliente]
-type Bebidas = [Bebida]
+type Bebidas = [Cliente->Cliente]
 
 --Punto 2
-rodri = Cliente "Rodri" 55 [] [Tintico]
-marcos = Cliente "Marcos" 40 [rodri] [Klusener "Guinda"]
-cristian = Cliente "Cristian" 2 [] [GrogXD, LaJarraLoca]
+rodri = Cliente "Rodri" 55 [] [tintico]
+marcos = Cliente "Marcos" 40 [rodri] [klusener "Guinda"]
+cristian = Cliente "Cristian" 2 [] [grogXD, laJarraLoca]
 ana = Cliente "Ana" 120 [marcos, rodri] []
 
 
@@ -68,12 +67,11 @@ descontar10 (Cliente nombre resistencia amigos bebidas) = (Cliente nombre (resis
 nombreModificado nombre fuerza =  (("e" ++).((erresSegunFuerza fuerza) ++). ("p" ++)) nombre
 erresSegunFuerza fuerza = replicate fuerza 'r'
 
-grogXD (Cliente nombre resistencia amigos bebidas) = Cliente nombre 0 amigos (GrogXD : bebidas)
-laJarraLoca (Cliente nombre resistencia amigos bebidas) = descontar10 (Cliente nombre resistencia (bajarResistenciaAAmigos amigos) (LaJarraLoca : bebidas))
---TODO: agregar la bebida a la lista de bebidas en klusener
-klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos ((Klusener sabor):bebidas)
-tintico (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia + 5* (length amigos)) amigos (Tintico : bebidas)
-soda fuerza (Cliente nombre resistencia amigos bebidas) = Cliente (nombreModificado nombre fuerza) resistencia amigos ((Soda fuerza):bebidas)
+grogXD (Cliente nombre resistencia amigos bebidas) = Cliente nombre 0 amigos bebidas
+laJarraLoca (Cliente nombre resistencia amigos bebidas) = descontar10 (Cliente nombre resistencia (bajarResistenciaAAmigos amigos) bebidas)
+klusener sabor (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia - length(sabor)) amigos bebidas
+tintico (Cliente nombre resistencia amigos bebidas) = Cliente nombre (resistencia + 5* (length amigos)) amigos bebidas
+soda fuerza (Cliente nombre resistencia amigos bebidas) = Cliente (nombreModificado nombre fuerza) resistencia amigos bebidas
 
 
 --Punto 6
@@ -85,55 +83,63 @@ rescatarse horas (Cliente nombre resistencia amigos bebidas) | horas <=3 = (Clie
 --Punto 7: Ver en Pruebas.txt, se implementa directamente en workspace.
 
 ------------------------------------------------------------TP 2---------------------------------------------------------------
-beber GrogXD = grogXD
-beber LaJarraLoca = laJarraLoca
-beber Tintico = tintico
-beber (Klusener sabor) = klusener sabor
-beber (Soda fuerza) = soda fuerza
+ --Punto 1.b)
+tomarUnaBebida bebida (Cliente nombre resistencia amigos bebidas) = bebida (Cliente nombre resistencia amigos (bebidas++[bebida]))
+
 
 --Punto  1.c)
 tomarTragos cliente [] = cliente
-tomarTragos cliente (tragoCab:tragoCola) =  tomarTragos ((beber tragoCab) cliente) tragoCola
+tomarTragos cliente listaTragos =  tomarTragos (tomarUnaBebida (head listaTragos) cliente) (tail listaTragos)
 
 --Punto 1.d)
-dameOtro (Cliente nombre resistencia amigos (bebidaCab:bebidasCola)) = (beber bebidaCab) (Cliente nombre resistencia amigos (bebidaCab:bebidasCola))
+dameOtro cliente = tomarUnaBebida (last (bebidas cliente)) cliente
 
 --Punto 2.a)
-nuevaResistencia cliente GrogXD = 0
-nuevaResistencia (Cliente _ resistencia _ _) LaJarraLoca = resistencia - 10
-nuevaResistencia (Cliente _ resistencia _ _) (Klusener sabor) = resistencia - length(sabor)
-nuevaResistencia (Cliente _ resistencia amigos _) Tintico = resistencia + 5* (length amigos)
-nuevaResistencia (Cliente _ resistencia _ _) (Soda _)= resistencia
+-- nuevaResistencia cliente grogXD = 0
+-- nuevaResistencia (Cliente nombre resistencia amigos bebidas) laJarraLoca = resistencia - 10
+-- nuevaResistencia (Cliente _ resistencia _ _) (klusener sabor) = resistencia - length(sabor)
+-- nuevaResistencia (Cliente _ resistencia amigos _) tintico = resistencia + 5* (length amigos)
+-- nuevaResistencia (Cliente _ resistencia _ _) (soda _)= resistencia
 
-cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
+--cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
 
 --Punto 2.b)
-cuantasPuedeTomar cliente= (length.(cualesPuedeTomar cliente)) 
+--cuantasPuedeTomar cliente= (length.(cualesPuedeTomar cliente)) 
 
 --Punto 3.a)
 robertoCarlos = Cliente "Roberto Carlos" 165 [] []
 
-mezclaExplosiva = (2.5, [beber GrogXD,beber GrogXD,beber (Klusener "Huevo"),beber (Klusener "Frutilla")])
-itinerarioBasico = (5.0, [beber LaJarraLoca, beber (Klusener "chocolate"), rescatarse 2, beber (Klusener "huevo")])
-salidaDeAmigos = (1.0, [beber (Soda 1),beber Tintico, hacerseAmigo robertoCarlos, beber LaJarraLoca])
+data Itinerario = Itinerario {
+nombreItinerario :: String,
+duracionEstimada :: Float,
+detalle :: Detalles
+} deriving Show
+
+type Detalles = [Cliente -> Cliente]
+
+mezclaExplosiva = Itinerario "Mezcla Explosiva" 2.5 [tomarUnaBebida grogXD, tomarUnaBebida grogXD, tomarUnaBebida (klusener "Huevo"), tomarUnaBebida (klusener "Frutilla")]
+itinerarioBasico = Itinerario "Itinerario Basico" 5.0 [tomarUnaBebida laJarraLoca, tomarUnaBebida (klusener "chocolate"), rescatarse 2, tomarUnaBebida (klusener "huevo")]
+salidaDeAmigos = Itinerario "Salida De Amigos" 1.0 [tomarUnaBebida (soda 1), tomarUnaBebida tintico, (hacerseAmigo robertoCarlos), tomarUnaBebida laJarraLoca]
+
 
 --Punto 3.b)
-ejecutarItinerario itinerario cliente = execute (snd itinerario) cliente
-execute [] cliente = cliente
-execute (cabItinerario:colaItinerario) cliente = execute colaItinerario (cabItinerario cliente)
+ejecutarItinerario itinerario cliente = ejecutar (detalle itinerario) cliente
+
+ejecutar [] cliente = cliente
+ejecutar (cabItinerario:colaItinerario) cliente = ejecutar colaItinerario (cabItinerario cliente)
 
 --Punto 4.a)
-intensidad itinerario = 1 * genericLength(snd itinerario)/(fst itinerario)
+intensidad itinerario = genericLength(detalle itinerario)/(duracionEstimada itinerario)
 
 --Punto 4.b)
-ejecutarMasIntenso cliente (cab:cola) = ejecutarItinerario (buscar cab cola) cliente
+intinerarioMasIntenso itenerarios intensidad = foldl (mayorSegun intensidad) (head itenerarios) (tail itenerarios)
 
-buscar max [] = max
-buscar max (cabe:cola) | intensidad max > intensidad cabe = buscar max (cola)
-                    |otherwise = buscar cabe (cola)
+mayorSegun intensidad unItinerario otroItinerario | intensidad unItinerario > intensidad otroItinerario = unItinerario
+                                                  | otherwise = otroItinerario
+
 
 --Punto 5.a)
-tragosChuck i  = (Soda i):(tragosChuck (i+1))
+tragosChuck i  = (soda i):(tragosChuck (i+1))
 chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
 --Punto 5.b)
@@ -144,7 +150,7 @@ chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 --Main> dameOtro chuckNorris
 --Cliente {nombre = "erpChuck", resistencia = 1000, amigos = [Cliente {nombre = "Ana", resistencia = 120, 
 --amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
---bebidas = [Tintico]}], bebidas = [Klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
+--bebidas = [Tintico]}], bebidas = [klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
 --bebidas = [Tintico]}], bebidas = []}], bebidas = [Soda 1,Soda 1,Soda 2,Soda 3,Soda 4,Soda 5,Soda 6,Soda..]}
 
 --Punto 5.d)
@@ -158,4 +164,4 @@ laJarraPopular espirituosidad (Cliente nombre resistencia (amigosCab:amigosCola)
 hacerGrupoAmigos cliente (Cliente nombre resistencia amigos bebidas) = hacerMuchosamigos cliente amigos
 
 hacerMuchosamigos cliente [] = cliente
-hacerMuchosamigos cliente (cab:cola) = hacerMuchosamigos (hacerseAmigo cab cliente) cola
+hacerMuchosamigos cliente (cab:cola) = hacerMuchosamigos (hacerseAmigo cab cliente) cola 

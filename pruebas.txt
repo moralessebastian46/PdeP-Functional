@@ -93,29 +93,29 @@ Cliente {nombre = "Ana", resistencia = 196, amigos = [Cliente {nombre = "Marcos"
 
 Punto 1b)
 
-*Main> (length.bebidas.(soda 3)) marcos
+*Main> (length.bebidas.tomarUnaBebida (soda 3)) marcos
 2
 
-*Main> (resistencia.(soda 3)) marcos
+*Main> (resistencia.tomarUnaBebida (soda 3)) marcos
 40
 
 
 Punto 1c)
 
-*Main> nombre (tomarTragos rodri [Soda 1, Soda 2])
+*Main> nombre (tomarTragos rodri [soda 1, soda 2])
 "errperpRodri"
 
-*Main> resistencia (tomarTragos marcos [Klusener "Huevo", Tintico, LaJarraLoca])
+*Main> resistencia (tomarTragos marcos [klusener "Huevo", tintico, laJarraLoca])
 30
 
-*Main> (length.bebidas) (tomarTragos marcos [Klusener "Huevo", Tintico, LaJarraLoca])
+*Main> (length.bebidas) (tomarTragos marcos [klusener "Huevo", tintico, laJarraLoca])
 4
 
 
 Punto 1d)
 
 *Main> dameOtro ana
-*** Exception: <interactive>:104:1-148: Non-exhaustive patterns in function dameOtro
+*** Exception: Prelude.last: empty list
 
 *Main> (length.bebidas.dameOtro) marcos
 2
@@ -123,19 +123,20 @@ Punto 1d)
 *Main> (resistencia.dameOtro) marcos
 34
 
-*Main> (length.bebidas.dameOtro.(soda 1)) rodri
+*Main> (length.bebidas.dameOtro.(tomarUnaBebida (soda 1))) rodri
+
 3
 
-*Main> (nombre.dameOtro.(soda 1)) rodri
+*Main> (nombre.dameOtro.tomarUnaBebida (soda 1)) rodri
 "erperpRodri"
 
 
 Punto 2b)
 
-*Main> length (cualesPuedeTomar rodri [GrogXD, Tintico, Klusener "Frutilla"])
+*Main> length (cualesPuedeTomar rodri [GrogXD, tintico, klusener "Frutilla"])
 2
 
-*Main> length (cualesPuedeTomar rodri [GrogXD, Tintico, Klusener "fruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuutuuuuuuilla"])
+*Main> length (cualesPuedeTomar rodri [GrogXD, tintico, klusener "fruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuutuuuuuuilla"])
 1
 
 
@@ -170,7 +171,7 @@ Punto 4a)
 Punto 4b)
 
 *Main> ejecutarMasIntenso rodri [salidaDeAmigos,mezclaExplosiva,itinerarioBasico]
-Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [LaJarraLoca,Tintico,Soda 1,Tintico]}
+Cliente {nombre = "erpRodri", resistencia = 45, amigos = [Cliente {nombre = "Roberto Carlos", resistencia = 155, amigos = [], bebidas = []}], bebidas = [laJarraLoca,tintico,Soda 1,tintico]}
 
 
 Punto 6)
