@@ -144,18 +144,16 @@ tragosChuck i  = (soda i):(tragosChuck (i+1))
 chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
 --Punto 5.b)
---En nuestro caso, al concatenar el último trago al principio de la lista si se podría pedir otro trago con la función dameOtro, el motor de Haskel llega
---a evaluar la funcion dameOtro por la evaluación diferida, pero luego, fallaría al querer mostrar el cliente por pantalla luego de ser evaluado por dicha 
---función porque la lista de tragos tomados es infinita:
+--No, chuckNorris no puede pedir otro trago con la función dameOtro debido a que ésta toma el último trago de la lista de 
+--bebidas del cliente, y en el caso de chuckNorris, su lista de bebidas es infinita. Debido al concepto de evalución diferida
+--Haskell se queda intentando reducir cuál es la última bebida.
 
 --Main> dameOtro chuckNorris
---Cliente {nombre = "erpChuck", resistencia = 1000, amigos = [Cliente {nombre = "Ana", resistencia = 120, 
---amigos = [Cliente {nombre = "Marcos", resistencia = 40, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
---bebidas = [Tintico]}], bebidas = [klusener "Guinda"]},Cliente {nombre = "Rodri", resistencia = 55, amigos = [], 
---bebidas = [Tintico]}], bebidas = []}], bebidas = [Soda 1,Soda 1,Soda 2,Soda 3,Soda 4,Soda 5,Soda 6,Soda..]}
+--(se queda reduciendo)
 
 --Punto 5.d)
---Si se puede porque solo evalua la resistencia de ambos, no llega a evaluar la lista infinita que tiene "Chuk" por el concepto de evaluación diferida.
+--Si se puede porque solo evalua la resistencia de ambos, no llega a evaluar la lista infinita que tiene "Chuck" por lazy evaluation. Es decir, 
+--si no se utiliza una abstracción Haskell no la evalua.
 
 
 --Punto 6)
