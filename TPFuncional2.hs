@@ -88,14 +88,15 @@ tomarUnaBebida bebida (Cliente nombre resistencia amigos bebidas) = bebida (Clie
 
 
 --Punto  1.c)
-tomarTragos cliente [] = cliente
-tomarTragos cliente listaTragos =  tomarTragos (tomarUnaBebida (head listaTragos) cliente) (tail listaTragos)
+
+tomarTragos cliente listaTragos = foldl (\cliente trago -> tomarUnaBebida trago cliente) cliente listaTragos
+
 
 --Punto 1.d)
-dameOtro cliente = tomarUnaBebida (last (bebidas cliente)) cliente
+dameOtro cliente = tomarUnaBebida ((last.bebidas) cliente) cliente
 
 --Punto 2.a)
-nuevaResistencia cliente trago = resistencia(tomarUnaBebida trago cliente)
+nuevaResistencia cliente trago = (resistencia.(tomarUnaBebida trago)) cliente
 
 cualesPuedeTomar cliente tragos = filter ((>0).nuevaResistencia cliente) tragos
 
@@ -121,8 +122,7 @@ salidaDeAmigos = Itinerario "Salida De Amigos" 1.0 [tomarUnaBebida (soda 1), tom
 --Punto 3.b)
 ejecutarItinerario itinerario cliente = ejecutar (detalle itinerario) cliente
 
-ejecutar [] cliente = cliente
-ejecutar (cabItinerario:colaItinerario) cliente = ejecutar colaItinerario (cabItinerario cliente)
+ejecutar detalles cliente = foldl (\cliente detalle -> detalle cliente) cliente detalles
 
 --Punto 4.a)
 intensidad itinerario = genericLength(detalle itinerario)/(duracionEstimada itinerario)
@@ -159,10 +159,13 @@ chuckNorris = Cliente "Chuck" 1000 [ana] (tragosChuck 1)
 
 
 --Punto 6)
+
+laJarraPopular 1 cliente = foldl hacerGrupoAmigos (head (amigos cliente)) (tail (amigos cliente)) 
+laJarraPopular espirituosidad cliente = foldl hacerGrupoAmigos (head (amigos cliente)) (tail (amigos cliente)) 
 -- laJarraPopular 0 cliente = cliente
 -- laJarraPopular espirituosidad (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) = laJarraPopular (espirituosidad-1) (hacerGrupoAmigos (Cliente nombre resistencia (amigosCab:amigosCola) bebidas) amigosCab)
 
--- hacerGrupoAmigos cliente (Cliente nombre resistencia amigos bebidas) = hacerMuchosamigos cliente amigos
+hacerGrupoAmigos cliente (Cliente nombre resistencia amigos bebidas) = hacerMuchosamigos cliente amigos
 
--- hacerMuchosamigos cliente [] = cliente
--- hacerMuchosamigos cliente (cab:cola) = hacerMuchosamigos (hacerseAmigo cab cliente) cola -}
+hacerMuchosamigos cliente [] = cliente
+hacerMuchosamigos cliente (cab:cola) = hacerMuchosamigos (hacerseAmigo cab cliente) cola
